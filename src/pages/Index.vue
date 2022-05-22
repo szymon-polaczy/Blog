@@ -1,10 +1,38 @@
 <template>
   <Layout>
-    <router-link :to="{path: '/blog/'}">
-      <h1>Blog</h1>
-    </router-link>
+    <section>
+      <h2>Here's our blogposts</h2>
+
+      <hr>
+
+      <div class="container">
+        <article v-for="edge in $page.markdownages.edges" :key="edge.node.id">
+          <router-link :to="{path: 'post/' + edge.node.title.replace(/ /g, '-').replace(/\?/g, '').toLowerCase() + '/'}">
+            <h3>{{edge.node.title}}</h3>
+            <p>{{edge.node.excerpt}}</p>
+          </router-link>
+        </article>
+      </div>
+    </section>
+
+    <g-link to="http://get-over.life" class="go-back-link">Go back</g-link>
+
   </Layout>
 </template>
+
+<page-query>
+  query {
+    markdownages: allMarkdownPost {
+      edges {
+        node {
+          id,
+          title,
+          excerpt
+        }
+      }
+    }
+  }
+</page-query>
 
 <script>
 export default {
