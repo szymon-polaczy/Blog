@@ -1,4 +1,4 @@
-# How to upload files in a Wordpress theme using XMLHttpRequest?
+# [Planned] Create Wordpress Ajax Functions And Use Them Without JQuery
 
 Here's how you can doing using built in Wordpress functions, which gives you much more safety than doing it all by yourself, while doing less than you would have to do.
 

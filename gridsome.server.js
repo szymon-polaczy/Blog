@@ -6,7 +6,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 const slug = (title) => {
-  return title.replace(/ /g, '-').replace(/\?/g, '').toLowerCase();
+  return title.replace(/ /g, '-').replace(/(\?|\[|\])/g, '').toLowerCase();
 };
 
 module.exports = function (api) {
