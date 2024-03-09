@@ -15,7 +15,7 @@
       </div>
     </section>
 
-    <g-link to="http://get-over.life" class="go-back-link">Go back</g-link>
+    <g-link to="http://get-over.online" class="go-back-link">Go back</g-link>
 
   </Layout>
 </template>
