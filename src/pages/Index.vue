@@ -1,7 +1,10 @@
 <template>
   <Layout>
     <section>
-      <h2>Here's our blogposts</h2>
+      <div class="header">
+        <h2>Here's our blogposts</h2>
+        <img src="../images.png" alt="" width="65">
+      </div>
 
       <hr>
 
@@ -14,8 +17,6 @@
         </article>
       </div>
     </section>
-
-    <g-link to="http://get-over.online" class="go-back-link">Go back</g-link>
 
   </Layout>
 </template>
@@ -59,5 +60,14 @@ export default {
 
 ol, ul {
   padding-inline-start: 17px;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row;
+  gap: 20px;
 }
 </style>
