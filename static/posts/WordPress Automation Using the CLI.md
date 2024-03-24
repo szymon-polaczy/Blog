@@ -46,3 +46,21 @@ All options for this command can be found here but here are the most usefull one
 wp db search "string" --network --all-tables #search for the string everywhere
 wp db search "string" --network --all-tables --regex #search for the string everywhere even inside other strings
 ```
+
+### Translate your changes
+
+If you ever added some new changes to the site that used .po files for translations, learn from my mistakes and create new POT files automatically.
+
+```bash
+# create a new updated .pot file
+wp i18n make-pot . languages/my-theme.pot #the dot is the source directory so remember to be in the right place
+wp i18n make-pot . languages/my-theme.pot --slug="my-theme" #if you want to specify the slug
+
+# update PO files using the new POT file
+wp i18n update-po languages/my-theme.pot languages/my-theme-en_US.po #the first file is the source and the second is the target
+```
+
+### Completion sake
+
+This list will keep growing whenever I find something interesting or usefull to add to it.
+There already exists a documentation for this so if you want the full list of commands, check it out [here](https://developer.wordpress.org/cli/commands/)
