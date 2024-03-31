@@ -60,6 +60,15 @@ wp i18n make-pot . languages/my-theme.pot --slug="my-theme" #if you want to spec
 wp i18n update-po languages/my-theme.pot languages/my-theme-en_US.po #the first file is the source and the second is the target
 ```
 
+### Don't like bash files?
+
+Bash is really simple but not always easy to understand or get just right but you're already a PHP wizard, write a PHP script that does the same thing and make wp-cli execute it for you
+
+```bash
+wp eval-file my-amazing-script.php
+wp eval-file my-amazing-script.php --skip-wordpress #if you don't want WordPress slowing you down or getting in your way
+```
+
 ### Completion sake
 
 This list will keep growing whenever I find something interesting or usefull to add to it.
