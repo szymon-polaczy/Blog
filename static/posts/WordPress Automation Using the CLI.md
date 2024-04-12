@@ -4,6 +4,11 @@ Automate your tasks away - Do the easy tasks and the complex ones without leavin
 
 -----
 
+### Get some help
+
+Remember that you don't have to always remember all of the commands or their specific option as the ```bash wp help``` command is there to help. 
+If you want to do something and you can't remember or don't know if it's possible, start with this command as it will show you the options you have.
+
 ## Databases 
 
 ### Sync your database with production
@@ -30,6 +35,12 @@ wp db check
 
 # replace the domains
 wp search-replace "https://production.com" "http://localhost:8888" --all-tables --network --verbose
+```
+
+**Make sure to flush the permalink structure just to be sure**
+
+```bash
+wp rewrite flush
 ```
 
 ### Never forget to do the easy stuff - Database Optimization
@@ -72,6 +83,8 @@ wp eval-file my-amazing-script.php
 wp eval-file my-amazing-script.php --skip-wordpress #if you don't want WordPress slowing you down or getting in your way
 ```
 
+If you want to test out some code first before writing a full script you can use ```bash wp shell``` command to run and test PHP code.
+
 ### Remember to make your backups work
 
 Remove any user interactions from the site and kick them off to make sure they don't screw with your backups.
@@ -110,10 +123,9 @@ wp core update-db
 
 # manage the themes
 wp theme install twentysixteen --activate #go back to the year it all went wrong
+wp theme activate twentysixteen
 wp theme update --all
 ```
-
-
 
 ### Completion sake
 
