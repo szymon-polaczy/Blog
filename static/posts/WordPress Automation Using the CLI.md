@@ -4,10 +4,24 @@ Automate your tasks away - Do the easy tasks and the complex ones without leavin
 
 -----
 
+## Why would you use WP-CLI
+
+It doesn't have the same restrictions as the website and the phpmyadmin. The memory and time restrictions don't apply to the CLI which allows you 
+to run some bigger commands or automations like creating a user on 30 sites when you hire someone new.
+
+-----
+
 ### Get some help
 
 Remember that you don't have to always remember all of the commands or their specific option as the ```bash wp help``` command is there to help. 
 If you want to do something and you can't remember or don't know if it's possible, start with this command as it will show you the options you have.
+
+### Issues on the site?
+
+Add the ```bash --skip-plugins --skip-themes``` options to any commands you run to make sure that the plugins and any active themes don't run and ruin your time.
+This should allow you to deactivate a plugin that's throwing a fatal error or update the core when you have an issue in your theme.
+
+-----
 
 ## Databases 
 
@@ -49,6 +63,16 @@ WP-CLI has an in built option to optimize the database without you having to lif
 
 ```bash
 wp db optimize #it runs mysqlcheck --optimize=true so you could also do that but it's less typing this way
+```
+
+### Regenerate Thumbnails is now obsolete
+
+The core now has the option to regenerate thumbnails using the cli
+
+```bash
+wp media regenerate --yes #avoid confirmation
+wp media regenerate --skip-delete #by the default it will remove the original thumbnails
+wp media regenerate --only-missing #the same option as the plugin had to regenerate only the missing sizes
 ```
 
 ### PHPMyAdmin Sucks for big databases
