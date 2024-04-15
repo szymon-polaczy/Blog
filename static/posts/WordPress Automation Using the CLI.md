@@ -78,7 +78,7 @@ wp media regenerate --only-missing #the same option as the plugin had to regener
 ### PHPMyAdmin Sucks for big databases
 
 If you need to find a string in your database and connecting to it in phpmyadmin takes ages, try using the CLI.
-All options for this command can be found here but here are the most usefull ones
+These are just the most usefull options so if you want more look through the [documentation][https://developer.wordpress.org/cli/commands/db/search/]
 
 ```bash
 wp db search "string" --network --all-tables #search for the string everywhere
@@ -119,13 +119,13 @@ wp maintenance-mode activate #deactivate to let them back in
 
 ### Cut your clients options
 
-You don't want him to mess with the site while you're working on it, do you?
+You don't want him to mess with the site while you're working on it
 
 ```php
 # add these to wp-config.php
 define('DISALLOW_FILE_MODS',true); #make sure they can't update anything
 
-# also make sure WordPress doesn't take their place
+# also make sure WordPress doesn't take his place
 define( 'AUTOMATIC_UPDATER_DISABLED', true );
 define( 'WP_AUTO_UPDATE_CORE', false );
 
@@ -134,7 +134,7 @@ add_filter( 'plugins_auto_update_enabled', '__return_false' );
 add_filter( 'themes_auto_update_enabled', '__return_false' );
 ```
 
-Now you can ssh into your site and manage the plugins, themes and core updates yourself.
+Now you can ssh into your site and manage the plugins, themes and core updates yourself without anyone being able to change things from the dashboard.
 
 ```bash
 # manage plugins
