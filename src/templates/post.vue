@@ -15,6 +15,19 @@ export default {
 }
 </script>
 
+<style>
+
+code {
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+main {
+  max-width: 100%;
+}
+
+</style>
+
 <page-query>
   query ($id: ID) {
     markdownPost(id: $id ) {
