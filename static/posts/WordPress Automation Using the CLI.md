@@ -78,7 +78,7 @@ wp media regenerate --only-missing #the same option as the plugin had to regener
 ### PHPMyAdmin Sucks for big databases
 
 If you need to find a string in your database and connecting to it in phpmyadmin takes ages, try using the CLI.
-These are just the most usefull options so if you want more look through the [documentation][https://developer.wordpress.org/cli/commands/db/search/]
+These are just the most usefull options so if you want more look through the <a href="https://developer.wordpress.org/cli/commands/db/search/" target="blank">documentation</a>
 
 ```bash
 wp db search "string" --network --all-tables #search for the string everywhere

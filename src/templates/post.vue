@@ -22,6 +22,10 @@ pre {
   padding: 10px 0;
 }
 
+a {
+  color: #0078d4;
+}
+
 main {
   max-width: 100%;
 }
