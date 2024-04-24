@@ -1,10 +1,10 @@
 <template>
   <Layout>
     <section>
-      <div class="header">
+      <header>
         <h2>Here's our blogposts</h2>
         <img src="../images.png" alt="" width="65">
-      </div>
+      </header>
 
       <hr>
 
@@ -63,7 +63,7 @@ ol, ul {
 }
 
 
-.header {
+header {
   display: flex;
   align-items: center;
   justify-content: space-between;

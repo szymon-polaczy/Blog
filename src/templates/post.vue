@@ -1,6 +1,10 @@
 <template>
     <Layout>  
-        <main v-html="$page.markdownPost.content"/>
+    <g-link to="/" class="logo">
+        <img src="../images.png" alt="" width="65">
+      </g-link>
+
+       <main v-html="$page.markdownPost.content"/>
 
         <g-link to="/" class="go-back-link">Go back</g-link>
 
@@ -16,6 +20,14 @@ export default {
 </script>
 
 <style>
+body {
+  padding-top: 25px;
+}
+
+.logo {
+  padding-bottom: 15px;
+  margin-right: auto;
+}
 
 pre {
   overflow-x: auto;
