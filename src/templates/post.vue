@@ -17,7 +17,7 @@ export default {
 
 <style>
 
-code {
+pre {
   overflow-x: auto;
   padding: 10px 0;
 }
