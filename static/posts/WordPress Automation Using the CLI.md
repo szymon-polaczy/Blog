@@ -65,6 +65,22 @@ WP-CLI has an in built option to optimize the database without you having to lif
 wp db optimize #it runs mysqlcheck --optimize=true so you could also do that but it's less typing this way
 ```
 
+### Profiling
+
+If you're having performance issues and you want to see what's going on, you can use the built-in wp profiler to see what's going on.
+
+```bash
+# This will run through the loading stages
+wp profile stage --spotlight --order-by=time --order=desc 
+wp profile stage --all --order-by=time --order=desc 
+
+# and this will do the same for the hooks used by the site
+wp profile stage --spotlight --order-by=time --order=desc 
+wp profile stage --all --order-by=time --order=desc 
+```
+
+If you have any issues with redirects or want to select a specific page there is an `--url` option that you can use.
+
 ### Regenerate Thumbnails is now obsolete
 
 The core now has the option to regenerate thumbnails using the cli
