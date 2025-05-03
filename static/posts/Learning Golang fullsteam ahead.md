@@ -37,5 +37,18 @@ If you need you can use s1... to unpack the slice and get the straight values
 ```go
 m1 := make(map[string]int) //string keys, int values
 m1["one"] = 1
+
+m2 := make(map[int][]string) //int keys, string array values
+m2[1] = []string{ "chocolate" }
 ```
 * you can delete stuff using delete(map, key)
+
+You can access something that doesn't exist and it will return empty if that key doesn't exits - You can just access everything but here's the proper way
+```go
+if value, ok : m2["four"]; ok {
+    fmt.Println("key four found in array")
+}
+```
+
+Maps use hashes internally and grow at 80% of fill where the memory is doubled and elements are incrementally copied over - I assume this means that maps might cause some small spikes in slow downs when setting up the doubled size.
+At least until now maps looked heavier than other types so it might be best to use them sparringly.
