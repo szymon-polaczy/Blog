@@ -2,7 +2,7 @@
   <Layout>
     <section>
       <header>
-        <h2>Here's our blogposts</h2>
+        <h2>Here are my blogposts</h2>
         <img src="../images.png" alt="" width="65">
       </header>
 
