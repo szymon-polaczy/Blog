@@ -1,4 +1,4 @@
-# Learning Golang - fullsteam ahead
+# Learning Golang fullsteam ahead
 
 This isn't written in any real order and it won't have everything on these items until I actually need them.
 These are basically the notes that I did when I was learning this language.
@@ -10,6 +10,8 @@ These are basically the notes that I did when I was learning this language.
 var a1 [5]int; //array of 5 ints
 ```
 * whatever isn't initialized is set to 0 in that type - 0 in int, empty '' in string, remember this as it might come up in loops
+
+---
 
 **Slices** are array without any size given, and so they can grow as needed
 ```go
@@ -28,6 +30,8 @@ s5 := s1[3:] //from the third element to the end
 * slices can have different capacities and length, they do not need to be always the same - using 3:6 creates a 3 lenthg slice with capacity of 6 - first 3 elements are empty
 
 If you need you can use s1... to unpack the slice and get the straight values
+
+---
 
 **Maps** are basically associated arrays or dictionaries - key, value arrays
 ```go
