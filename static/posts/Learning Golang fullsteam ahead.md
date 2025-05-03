@@ -52,3 +52,8 @@ if value, ok : m2["four"]; ok {
 
 Maps use hashes internally and grow at 80% of fill where the memory is doubled and elements are incrementally copied over - I assume this means that maps might cause some small spikes in slow downs when setting up the doubled size.
 At least until now maps looked heavier than other types so it might be best to use them sparringly.
+
+## Sort Package
+
+Go has a built in sort package ```go sort.Ints(slice1) ``` or ```go sort.Slice(slice, func)``` - where in the second you pass a function that sort them based on whatever you assign - same as in php filter, sort, map.
+There also exists sort.Sort(structs) but you have to create a sort interface for that struct - basically add these 3 methods ```go Len(), Swap(i,j) Less(i,j)``` to the struct and it should work correctly.
