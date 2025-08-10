@@ -4,7 +4,7 @@ You know that feeling when you're looking at WordPress code and it feels like it
 
 Here's the thing though—PHP has seriously evolved. The language has been quietly adding features that solve real WordPress development problems. Not the academic "computer science" features, but practical tools that make your code cleaner, safer, and easier to maintain.
 
-This guide covers the PHP features that actually matter for WordPress development. We're talking about features that work on real hosting environments, solve actual WordPress problems, and won't break when your client is still running PHP 7.4.
+This guide covers the PHP features that actually matter for WordPress development. We're talking about features that work on real hosting environments, solve actual WordPress problems, and call out minimum versions so you can plan for clients still on PHP 7.4.
 
 ## What We're Looking At
 
@@ -30,7 +30,7 @@ if (isset($options['timeout'])) {
 }
 ```
 
-Since PHP 7.4, there's a much cleaner way:
+Use the null coalescing operator (PHP 7.0) and null coalescing assignment (PHP 7.4):
 
 ```php
 $api_key = $options['api_key'] ?? '';
@@ -450,10 +450,11 @@ The newest PHP feature allows properties with custom behavior:
 
 ```php
 class Product {
-    private float $base_price = 0;
-    
+    private float $base_price = 0.0;
+    private string $title_raw = '';
+
     public float $price {
-        get => $this->base_price;
+        get { return $this->base_price; }
         set {
             if ($value < 0) {
                 throw new InvalidArgumentException('Price cannot be negative');
@@ -461,13 +462,14 @@ class Product {
             $this->base_price = $value;
         }
     }
-    
+
     public float $price_with_tax {
-        get => $this->base_price * 1.2; // Always calculated
+        get { return $this->base_price * 1.2; } // Always calculated
     }
-    
+
     public string $title {
-        set => ucwords(trim($value)); // Always formatted
+        get { return $this->title_raw; }
+        set { $this->title_raw = ucwords(trim($value)); } // Always formatted
     }
 }
 ```
