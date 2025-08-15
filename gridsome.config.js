@@ -21,6 +21,9 @@ module.exports = {
   transformers: {
     remark: {
       //Config options can be added here
+      plugins: [
+        '@gridsome/remark-prismjs'
+      ]
     }
   }
 }
