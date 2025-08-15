@@ -10,9 +10,13 @@
 
       <div class="container">
         <article v-for="edge in $page.markdownages.edges" :key="edge.node.id">
-          <router-link :to="{path: 'post/' + edge.node.title.replace(/ /g, '-').replace(/(\?|\[|\])/g, '').toLowerCase() + '/'}">
-            <h3>{{edge.node.title}}</h3>
+          <router-link :to="{path: 'post/' + slugFromContent(edge.node.content, edge.node.id) + '/'}">
+            <h3>{{ titleFromContent(edge.node.content) }}</h3>
             <p>{{edge.node.excerpt}}</p>
+            <div class="list-meta grey-text">
+              <span class="tags" v-if="parseTags(edge.node.content).length">{{ parseTags(edge.node.content).join(', ') }}</span>
+              <span class="modified" v-if="parseModified(edge.node.content)">{{ parseModified(edge.node.content) }}</span>
+            </div>
           </router-link>
         </article>
       </div>
@@ -27,8 +31,8 @@
       edges {
         node {
           id,
-          title,
-          excerpt
+          excerpt,
+          content
         }
       }
     }
@@ -39,6 +43,33 @@
 export default {
   metaInfo: {
     title: 'Get Over Life'
+  },
+  methods: {
+    titleFromContent (html) {
+      if (!html) return ''
+      const match = String(html).match(/<h1[^>]*>(.*?)<\/h1>/i)
+      return match ? match[1].replace(/<[^>]+>/g, '').trim() : ''
+    },
+    slugFromContent (html, fallback) {
+      const title = this.titleFromContent(html) || String(fallback || '')
+      return title.replace(/ /g, '-').replace(/(\?|\[|\])/g, '').toLowerCase()
+    },
+    parseTags (contentHtml) {
+      if (!contentHtml) return []
+      const firstPInner = (contentHtml.match(/<p>([\s\S]*?)<\/p>/i) || [,''])[1]
+      const match = firstPInner.match(/Tags:\s*([\s\S]*?)(?:<br\s*\/?>|\n|\r|$|Modified\s+Date:)/i)
+      if (!match) return []
+      return match[1]
+        .split(/[;,]/)
+        .map(s => s.trim())
+        .filter(Boolean)
+    },
+    parseModified (contentHtml) {
+      if (!contentHtml) return ''
+      const firstPInner = (contentHtml.match(/<p>([\s\S]*?)<\/p>/i) || [,''])[1]
+      const match = firstPInner.match(/Modified\s+Date:\s*([\s\S]*?)(?:<br\s*\/?>|\n|\r|$)/i)
+      return match ? match[1].trim() : ''
+    }
   }
 }
 </script>
@@ -69,5 +100,20 @@ header {
   justify-content: space-between;
   flex-flow: row;
   gap: 20px;
+}
+
+.list-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grey-text {
+  color: #777;
+}
+
+/* ensure grey color within clickable article link */
+.container a .list-meta {
+  color: #777;
 }
 </style>

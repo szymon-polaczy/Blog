@@ -1,3 +1,6 @@
+Tags: WordPress; CLI; Automatization
+Modified Date: March 9th, 2024
+
 # WordPress Automation Using the CLI
 
 Automate your tasks away - Do the easy tasks and the complex ones without leaving your beloved terminal.
