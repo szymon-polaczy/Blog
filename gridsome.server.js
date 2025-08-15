@@ -18,6 +18,17 @@ const extractTitleFromContent = (html) => {
   return match[1].replace(/<[^>]+>/g, '').trim()
 }
 
+const extractTagsFromContent = (html) => {
+  if (!html) return []
+  const firstPInner = (String(html).match(/<p>([\s\S]*?)<\/p>/i) || [,''])[1]
+  const match = firstPInner.match(/Tags:\s*([\s\S]*?)(?:<br\s*\/?>|\n|\r|$|Modified\s+Date:)/i)
+  if (!match) return []
+  return match[1]
+    .split(/[;,]/)
+    .map(s => s.trim())
+    .filter(Boolean)
+}
+
 module.exports = function (api) {
   api.loadSource(({ addCollection }) => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
@@ -43,6 +54,8 @@ module.exports = function (api) {
 
     const edges = data && data.markdownages ? data.markdownages.edges : []
 
+    const tagSlugToContext = {}
+
     edges.forEach(({ node }) => {
       const titleFromH1 = extractTitleFromContent(node.content)
       createPage({
@@ -50,6 +63,28 @@ module.exports = function (api) {
         component: './src/templates/post.vue',
         context: {
           id: node.id
+        }
+      })
+
+      const tags = extractTagsFromContent(node.content)
+      tags.forEach((tag) => {
+        const tagSlug = slug(tag)
+        if (!tagSlugToContext[tagSlug]) {
+          tagSlugToContext[tagSlug] = { tag, ids: [] }
+        }
+        tagSlugToContext[tagSlug].ids.push(node.id)
+      })
+    })
+
+    // Create tag listing pages
+    Object.entries(tagSlugToContext).forEach(([tagSlug, { tag, ids }]) => {
+      createPage({
+        path: `/tag/${tagSlug}`,
+        component: './src/templates/tag.vue',
+        context: {
+          tag,
+          slug: tagSlug,
+          ids
         }
       })
     })

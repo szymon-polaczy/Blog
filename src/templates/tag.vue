@@ -1,18 +1,18 @@
 <template>
   <Layout>
     <section>
-      <header>
-        <h2>Here are my blogposts</h2>
+      <header class="tag-header">
+        <h2>Tag: {{ $context.tag }}</h2>
         <img src="../images.png" alt="" width="65">
       </header>
 
       <hr>
 
       <div class="container">
-        <article v-for="edge in $page.markdownages.edges" :key="edge.node.id">
-          <router-link :to="{path: 'post/' + slugFromContent(edge.node.content, edge.node.id) + '/'}">
+        <article v-for="edge in $page.posts.edges" :key="edge.node.id">
+          <router-link :to="{path: '/post/' + slugFromContent(edge.node.content, edge.node.id) + '/'}">
             <h3>{{ titleFromContent(edge.node.content) }}</h3>
-            <p>{{edge.node.excerpt}}</p>
+            <p>{{ edge.node.excerpt }}</p>
           </router-link>
           <div class="list-meta grey-text">
             <span class="tags" v-if="parseTags(edge.node.content).length">
@@ -23,22 +23,21 @@
         </article>
       </div>
     </section>
-
   </Layout>
 </template>
 
 <page-query>
-  query {
-    markdownages: allMarkdownPost {
-      edges {
-        node {
-          id,
-          excerpt,
-          content
-        }
+query($ids: [ID]) {
+  posts: allMarkdownPost(filter: { id: { in: $ids } }) {
+    edges {
+      node {
+        id,
+        excerpt,
+        content
       }
     }
   }
+}
 </page-query>
 
 <script>
@@ -80,31 +79,16 @@ export default {
 </script>
 
 <style>
-.home-links a {
-  margin-right: 1rem;
+.tag-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .container a {
   color: #000;
   text-decoration: none;
-}
-
-.container a:focus,
-.container a:hover {
-  text-decoration: underline;
-}
-
-ol, ul {
-  padding-inline-start: 17px;
-}
-
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: row;
-  gap: 20px;
 }
 
 .list-meta {
@@ -114,11 +98,6 @@ header {
 }
 
 .grey-text {
-  color: #777;
-}
-
-/* ensure grey color within clickable article link */
-.container a .list-meta {
   color: #777;
 }
 
@@ -132,3 +111,4 @@ header {
   color: #4da3ff;
 }
 </style>
+

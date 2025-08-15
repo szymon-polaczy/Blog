@@ -6,7 +6,11 @@
       </g-link>
       <div class="post-meta" v-if="hasMeta">
         <div class="meta-row grey-text">
-          <span class="tags" v-if="tags && tags.length">{{ tags.join(', ') }}</span>
+          <span class="tags" v-if="tags && tags.length">
+            <template v-for="(tag, i) in tags">
+              <router-link :key="tag" class="tag-link" :to="'/tag/' + slug(tag)">{{ tag }}</router-link><span v-if="i < tags.length - 1">, </span>
+            </template>
+          </span>
           <span class="modified" v-if="modifiedDate">{{ modifiedDate }}</span>
         </div>
       </div>
@@ -23,6 +27,11 @@
 export default {
   metaInfo: {
     title: 'Get Over Life'
+  },
+  methods: {
+    slug (text) {
+      return String(text || '').replace(/ /g, '-').replace(/(\?|\[|\])/g, '').toLowerCase()
+    }
   },
   computed: {
     contentHtml () {
@@ -125,6 +134,10 @@ h2 {
 
 h3 {
   font-size: clamp(1.45em, 2.2vw, 2.17em);
+}
+
+.tag-link {
+  color: #4da3ff;
 }
 </style>
 
